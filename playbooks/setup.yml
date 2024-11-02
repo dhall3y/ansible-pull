@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: localhost
 
   roles:
     - system_update
