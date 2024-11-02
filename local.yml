@@ -1,0 +1,9 @@
+- hosts: all
+
+  roles:
+    - system_update
+    - system_config
+    - zsh
+    - utils
+    - nvim
+    - nodejs
