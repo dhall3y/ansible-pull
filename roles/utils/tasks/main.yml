@@ -1,0 +1,20 @@
+---
+- name: install utils
+  apt:
+    name:
+      - git
+      - unzip
+      - tree
+      - wget
+      - tar
+      - gzip
+      - curl 
+  become: true
+
+- name: make sure build essentials are present
+  apt:
+    name:
+      - build-essential
+      - cmake
+      - gcc
+  become: true

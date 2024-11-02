@@ -1,0 +1,15 @@
+---
+
+#TODO: change this to use template instead
+
+- name: copy .zshenv if different
+  ansible.builtin.copy:
+    src: .zshenv
+    dest: ~/.zshenv
+    backup: yes
+
+- name: copy config directory if different
+  ansible.builtin.copy:
+    src: zsh/
+    dest: ~/.config/zsh/
+    backup: yes

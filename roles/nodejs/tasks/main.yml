@@ -1,0 +1,25 @@
+---
+- name: Install nvm
+  ansible.builtin.shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  args:
+    creates: "$HOME/.nvm/nvm.sh"
+
+#- name: Download NVM installation script
+#  ansible.builtin.shell:
+#     wget -O /tmp/install_nvm.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh
+#  args:
+#    executable: /bin/bash
+#
+#- name: Execute the NVM installation script
+#  ansible.builtin.shell:
+#    . /tmp/install_nvm.sh
+#  args:
+#    executable: /bin/bash
+#
+#- name : Install node
+#  ansible.builtin.shell:
+#    /home/ubuntu/.nvm/nvm.sh install node
+#  become_user: ubuntu
+#  become: true
+
