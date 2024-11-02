@@ -12,6 +12,6 @@
   ignore_errors: true
 
 - name: Fix broken dependencies if dist upgrade failed
-  command: apt --fix-broken install
+  command: apt --fix-broken install -y
   when: upgrade is failed
   become: true
