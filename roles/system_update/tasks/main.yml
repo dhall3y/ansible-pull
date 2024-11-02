@@ -8,3 +8,10 @@
   apt:
     upgrade: dist
   become: true
+  register: upgrade
+  ignore_errors: true
+
+- name: Fix broken dependencies if dist upgrade failed
+  command: apt --fix-broken install
+  when: upgrade is failed
+  become: true
