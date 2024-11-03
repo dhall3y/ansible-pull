@@ -2,22 +2,42 @@
 - name: install kitty pre-built binaries
   ansible.builtin.shell: >
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  args:
+    creates: ~/.local/kitty.app/bin/kitty
 
 - name: Ensure the fonts directory exists
   ansible.builtin.file:
     path: ~/.local/share/fonts
     state: directory
+ 
+- name: check if font already installed
+  ansible.builtin.stat:
+    path: ~/.local/share/fonts/Comic Code Ligatures
+  register: comic_code
 
+# FIX: not safe
 - name: Decrypt the tar.gz.gpg file
-  command: >
-    'gpg --batch --yes --passphrase "{{ font_passwd }}" -o ~/.local/share/fonts/comic-code.tar.gz -d roles/kitty/files/comic-code.tar.gz.gpg'
+  ansible.builtin.shell: >
+    echo {{ font_passwd }} | gpg --batch --yes --passphrase-fd 0 -o ~/.local/share/fonts/comic-code.tar.gz -d ./roles/kitty/files/comic-code.tar.gz.gpg
   register: decrypt_result
   changed_when: decrypt_result.rc == 0
+  when: not comic_code.stat.exists
+  no_log: true
 
 - name: Untar the decrypted file into the fonts directory
-  unarchive:
-    src: ~/.local/share/fonts/comic-code.tar.gz
+  ansible.builtin.unarchive:
+    src: /home/ubuntu/.local/share/fonts/comic-code.tar.gz
     dest: ~/.local/share/fonts
+    remote_src: yes
+  when: decrypt_result.changed
+
+- name: delete tar.gz and tar.gz.gpg
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - ~/.local/share/fonts/comic-code.tar.gz
+    - ~/.local/share/fonts/comic-code.tar.gz.gpg
   when: decrypt_result.changed
 
 - name: copy kitty config directory if different
