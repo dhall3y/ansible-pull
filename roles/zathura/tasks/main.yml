@@ -1,0 +1,5 @@
+---
+- name: install zathura
+  ansible.builtin.apt:
+    name: zathura
+    state: present
