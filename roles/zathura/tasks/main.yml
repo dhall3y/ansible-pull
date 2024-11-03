@@ -3,3 +3,4 @@
   ansible.builtin.apt:
     name: zathura
     state: present
+  become: true
