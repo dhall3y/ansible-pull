@@ -26,7 +26,7 @@
 
 - name: Untar the decrypted file into the fonts directory
   ansible.builtin.unarchive:
-    src: /home/ubuntu/.local/share/fonts/comic-code.tar.gz
+    src: /home/{{ ansible_user_id }}/.local/share/fonts/comic-code.tar.gz
     dest: ~/.local/share/fonts
     remote_src: yes
   when: decrypt_result.changed

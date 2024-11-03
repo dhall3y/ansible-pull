@@ -5,18 +5,8 @@
   args:
     creates: "$HOME/.nvm/nvm.sh"
 
-#- name: Download NVM installation script
-#  ansible.builtin.shell:
-#     wget -O /tmp/install_nvm.sh https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh
-#  args:
-#    executable: /bin/bash
-#
-#- name: Execute the NVM installation script
-#  ansible.builtin.shell:
-#    . /tmp/install_nvm.sh
-#  args:
-#    executable: /bin/bash
-#
+# TODO: install node 
+
 #- name : Install node
 #  ansible.builtin.shell:
 #    /home/ubuntu/.nvm/nvm.sh install node

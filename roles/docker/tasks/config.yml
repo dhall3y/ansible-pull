@@ -4,9 +4,11 @@
     name: docker
     state: present
 
+# FIX: use `lookup('ansible.builtin.config', 'DEFAULT_BECOME_USER')` instead
+# https://github.com/ansible/ansible/issues/83997
 - name: add docker group to user
   ansible.builtin.user:
-    name: "{{ ansible_user }}"
+    name: "{{ ansible_user_id }}"
     groups: docker
     append: true
   become: true
