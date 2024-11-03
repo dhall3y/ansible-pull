@@ -1,11 +1,11 @@
 ---
 - name: update apt cache
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
   become: true
 
 - name: update package
-  apt:
+  ansible.builtin.apt:
     upgrade: dist
   become: true
   register: upgrade

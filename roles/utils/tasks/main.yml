@@ -1,6 +1,6 @@
 ---
 - name: install utils
-  apt:
+  ansible.builtin.apt:
     name:
       - git
       - unzip
@@ -12,7 +12,7 @@
   become: true
 
 - name: make sure build essentials are present
-  apt:
+  ansible.builtin.apt:
     name:
       - build-essential
       - cmake

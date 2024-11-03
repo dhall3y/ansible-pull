@@ -1,6 +1,6 @@
 ---
 - name: Install neovim dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - ripgrep
       - xclip
