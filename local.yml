@@ -1,10 +1,10 @@
 - hosts: localhost
 
   roles:
-    - system_update
-    - system_config
-    - zsh
+    #- system_update
+    #- system_config
+    #- zsh
     - utils
-    - nvim
-    - nodejs
+    #- nvim
+    #- nodejs
     - kitty
