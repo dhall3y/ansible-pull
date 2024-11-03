@@ -4,3 +4,9 @@
     name: zathura
     state: present
   become: true
+
+- name: copy zathura config directory if different
+  ansible.builtin.copy:
+    src: zathura/
+    dest: ~/.config/zathura/
+    backup: yes
