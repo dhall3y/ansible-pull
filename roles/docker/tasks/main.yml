@@ -1,0 +1,40 @@
+---
+- name: install required package for install
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - software-properties-common
+    state: present
+  become: true
+
+- name: create directory for Docker's GPG key
+  ansible.builtin.file:
+    path: /etc/apt/keyrings/
+    state: directory
+    mode: '0755'
+
+- name: add docker apt key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    mode: '0644'
+    force: true
+  become: true
+
+- name: add Docker Repository
+  apt_repository:
+    repo: deb [signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu focal stable
+    state: present
+  become: true
+
+- name: update apt and install docker-ce
+  ansible.builtin.apt:
+    name:
+    - docker-ce
+    - docker-compose
+    state: latest
+    update_cache: true
+  become: true
+
+- import_tasks: config.yml

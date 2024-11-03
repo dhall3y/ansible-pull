@@ -12,7 +12,7 @@
  
 - name: check if font already installed
   ansible.builtin.stat:
-    path: ~/.local/share/fonts/Comic Code Ligatures
+    path: ~/.local/share/fonts/Comic Code
   register: comic_code
 
 # FIX: not safe
