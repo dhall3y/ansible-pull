@@ -12,7 +12,6 @@ zstyle ':completion:*' menu select
 #set emacs style keybinding -v for vim
 bindkey -e
 
-
 # Enable backward selection with Shift+Tab
 bindkey '^[[Z' reverse-menu-complete
 
@@ -34,6 +33,9 @@ bindkey -M emacs "^[[A" up-line-or-beginning-search
 #theme
 fpath=($ZDOTDIR/themes/ $fpath)
 autoload -Uz common; common
+
+alias vim=nvim
+alias vi=nvim
 
 #linux
 #alias ls='ls --color=auto'

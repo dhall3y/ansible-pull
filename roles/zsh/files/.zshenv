@@ -10,7 +10,6 @@ export SAVEHIST=10000
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 
-VIM='nvim'
-export EDITOR=$VIM
-export GIT_EDITOR=$VIM
-export VISUAL=$VIM
+export EDITOR=nvim
+export GIT_EDITOR=nvim
+export VISUAL=nvim
