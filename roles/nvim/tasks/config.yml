@@ -1,5 +1,7 @@
-- name: Clone into into ~/.config/nvim
-  ansible.builtin.git:
-    repo: "https://github.com/dhall3y/kickstart.nvim.git"
-    dest: "~/.config/nvim"
-    update: yes        
+---
+- name: copy nvim config directory if different
+  ansible.builtin.copy:
+    src: nvim/
+    dest: ~/.config/nvim/
+    backup: yes
+
