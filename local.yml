@@ -1,12 +1,30 @@
 - hosts: localhost
 
   roles:
-    - system_update
-    - system_config
-    - zsh
-    - utils
-    - nvim
-    - nodejs
-    - kitty
-    - docker
-    - zathura
+    - role: system_update
+      tags:
+        - system_update
+    - role: system_config
+      tags:
+        - system_config
+    - role: zsh
+      tags:
+        - zsh
+    - role: utils
+      tags:
+        - utils
+    - role: nvim
+      tags:
+        - nvim
+    - role: nodejs
+      tags:
+        - nodejs
+    - role: kitty
+      tags:
+        - kitty
+    - role: docker
+      tags:
+        - docker
+    - role: zathura
+      tags:
+        - zathura
