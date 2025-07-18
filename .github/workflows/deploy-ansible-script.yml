@@ -1,0 +1,31 @@
+name: deploy ansible.sh
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-wireguard:
+    runs-on: ubuntu-latest
+    outputs:
+      wg-interface: wg0
+    steps:
+      - name: Install WireGuard
+        run: sudo apt-get update && sudo apt-get install -y wireguard iproute2
+
+      - name: Setup WireGuard interface
+        run: |
+          echo "${{ secrets.WIREGUARD_PRIVATE_KEY }}" > privatekey
+          sudo ip link add dev wg0 type wireguard
+          sudo ip address add dev wg0 10.0.0.4/32
+          sudo wg set wg0 listen-port 0 private-key privatekey peer luT4kuJuozo/Z0de8dgVlHhzDzUs7CN3FEAln7kPYWg= allowed-ips 192.168.0.0/24 endpoint wireguard.muracci.me:56789
+          sudo ip link set up dev wg0
+
+      - name: Test connectivity
+        run: curl -v http://192.168.0.12
+
+  rsync-job:
+    runs-on: ubuntu-latest
+    needs: setup-wireguard
+    steps:
+      - name: echo
+        run: echo 'test finished'
