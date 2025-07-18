@@ -10,36 +10,33 @@
       ansible.builtin.file:
         path: /usr/local/bin
         state: directory
-        mode: '0755'
+        mode: "0755"
       become: true
-    
+
     - name: Download neovim prebuilt binary
       ansible.builtin.get_url:
-        url: "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
-        dest: "/tmp/nvim-linux64.tar.gz"
-        mode: '0644'
-    
-    
+        url: "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz"
+        dest: "/tmp/nvim-linux-x86_64.tar.gz"
+        mode: "0644"
+
     - name: Extract neovim binary
       ansible.builtin.unarchive:
-        src: "/tmp/nvim-linux64.tar.gz"
+        src: "/tmp/nvim-linux-x86_64.tar.gz"
         dest: "/opt/"
         remote_src: true
       become: true
-    
-    
-    - name: Create symlink from /usr/local/bin/nvim to /opt/nvim-linux64/bin/nvim
+
+    - name: Create symlink from /usr/local/bin/nvim to /opt/nvim-linux-x86_64/bin/nvim
       ansible.builtin.file:
-        src: /opt/nvim-linux64/bin/nvim
+        src: /opt/nvim-linux-x86_64/bin/nvim
         dest: /usr/local/bin/nvim
         state: link
       become: true
-    
-    
+
     - name: Clean up temporary files
       ansible.builtin.file:
         path: "/tmp/nvim-linux64*"
         state: absent
       become: true
-    
+
 - import_tasks: config.yml
