@@ -26,19 +26,11 @@ jobs:
 
       - name: Install WireGuard
         run: |
-          sudo apt-get update
           sudo apt-get install -y wireguard
 
       - name: Bring up WireGuard interface
         run: sudo wg-quick up wg0
 
-      - name: Show WireGuard status and routing
-        run: |
-          ip a show wg0
-          ip route
-          sudo wg
-
       - name: Test DNS & connectivity
         run: |
-          dig nginx.homelab.int @192.168.0.12 || true
           curl -v --max-time 10 http://nginx.homelab.int || true
