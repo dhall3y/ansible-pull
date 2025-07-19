@@ -21,6 +21,8 @@ jobs:
 
       - run: sudo ip link set up dev wg0
 
+      - run: curl -vvv http://10.0.0.1
+
       - run: curl -vvv http://nginx.homelab.int
 
   rsync-job:
