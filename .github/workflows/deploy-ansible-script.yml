@@ -26,9 +26,10 @@ jobs:
           ping -c 2 10.0.0.1 || true
           ping -c 2 192.168.0.12 || true
 
-      - name: update dns
+      - name: Set DNS for wg0
         run: |
-          echo "nameserver 192.168.0.10" | sudo tee /etc/resolv.conf
+          sudo resolvectl dns wg0 192.168.0.12
+          sudo resolvectl domain wg0 ~.
 
       - name: Test connectivity
         run: curl -v --max-time 10 http://nginx.homelab.int
