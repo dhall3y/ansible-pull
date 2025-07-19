@@ -1,4 +1,4 @@
-name: deploy ansible.sh
+name: Setup WireGuard
 
 on:
   workflow_dispatch:
@@ -6,26 +6,39 @@ on:
 jobs:
   setup-wireguard:
     runs-on: ubuntu-latest
-    outputs:
-      wg-interface: wg0
     steps:
-      - run: sudo apt install wireguard
+      - name: Create WireGuard config
+        run: |
+          sudo mkdir -p /etc/wireguard
+          sudo tee /etc/wireguard/wg0.conf > /dev/null <<EOF
+          [Interface]
+          PrivateKey = ${{ secrets.WIREGUARD_PRIVATE_KEY }}
+          Address = 10.0.0.4/32
+          MTU = 1420
+          DNS = 192.168.0.12
 
-      - run: echo "${{ secrets.WIREGUARD_PRIVATE_KEY }}" > privatekey
+          [Peer]
+          PublicKey = v/M0zEAqKvFyeeg6wLSV0m4Nu51I/zL+fym3PVgv4D4=
+          AllowedIPs = 0.0.0.0/0
+          Endpoint = ${{ secrets.WIREGUARD_ENDPOINT }}
+          PersistentKeepalive = 21
+          EOF
 
-      - run: sudo ip link add dev wg0 type wireguard
+      - name: Install WireGuard
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wireguard
 
-      - run: sudo ip address add dev wg0 10.0.0.4 peer 10.0.0.1
+      - name: Bring up WireGuard interface
+        run: sudo wg-quick up wg0
 
-      - run: sudo wg set wg0 listen-port 48123 private-key privatekey peer DtiplHBOyjn+SfnSHnBWDtqm9v2oz+nsNDQ3kALOui4= allowed-ips 0.0.0.0/0 endpoint wireguard.muracci.me:51820
+      - name: Show WireGuard status and routing
+        run: |
+          ip a show wg0
+          ip route
+          sudo wg
 
-      - run: sudo ip link set up dev wg0
-
-      - run: curl -vvv http://192.168.0.12:8888
-
-  rsync-job:
-    runs-on: ubuntu-latest
-    needs: setup-wireguard
-    steps:
-      - name: echo
-        run: echo 'test finished'
+      - name: Test DNS & connectivity
+        run: |
+          dig nginx.homelab.int @192.168.0.12 || true
+          curl -v --max-time 10 http://nginx.homelab.int || true
