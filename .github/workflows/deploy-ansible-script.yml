@@ -17,7 +17,7 @@ jobs:
 
       - run: sudo ip address add dev wg0 10.0.0.4 peer 10.0.0.1
 
-      - run: sudo wg set wg0 listen-port 48123 private-key privatekey peer v/M0zEAqKvFyeeg6wLSV0m4Nu51I/zL+fym3PVgv4D4= allowed-ips 0.0.0.0/0 endpoint wireguard.muracci.me:51820
+      - run: sudo wg set wg0 listen-port 48123 private-key privatekey peer DtiplHBOyjn+SfnSHnBWDtqm9v2oz+nsNDQ3kALOui4= allowed-ips 0.0.0.0/0 endpoint wireguard.muracci.me:51820
 
       - run: sudo ip link set up dev wg0
 
