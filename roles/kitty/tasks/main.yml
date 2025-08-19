@@ -9,11 +9,16 @@
   ansible.builtin.file:
     path: ~/.local/share/fonts
     state: directory
- 
+
 - name: check if font already installed
   ansible.builtin.stat:
     path: ~/.local/share/fonts/Comic Code
   register: comic_code
+
+- name: load vault secrets
+  ansible.builtin.include_vars:
+    file: vault.yml
+    name: vault
 
 # FIX: not safe
 - name: Decrypt the tar.gz.gpg file
