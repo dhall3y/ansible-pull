@@ -1,0 +1,21 @@
+---
+- name: Create Developer directory if it does not exist
+  ansible.builtin.file:
+    path: ~/Developer/
+    state: directory
+
+- name: install stow
+  ansible.builtin.apt:
+    name: stow
+  become: true
+
+- name: git clone dotfiles repo
+  ansible.builtin.git:
+    repo: https://github.com/dhall3y/.dotfiles.git
+    dest: ~/Developer/dotfiles
+    version: stow
+
+- name: stow config
+  ansible.builtin.shell: stow *
+  args:
+    chdir: ~/Developer/dotfiles/stow/

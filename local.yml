@@ -28,3 +28,6 @@
     - role: zathura
       tags:
         - zathura
+    - role: dotfiles
+      tags:
+        - dotfiles
