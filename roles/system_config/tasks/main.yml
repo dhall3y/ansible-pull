@@ -3,3 +3,8 @@
   ansible.builtin.file:
     path: ~/.config/
     state: directory
+
+- name: Create Developer directory if it does not exist
+  ansible.builtin.file:
+    path: ~/Developer/
+    state: directory
