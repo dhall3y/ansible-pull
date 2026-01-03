@@ -19,9 +19,6 @@
     - role: nodejs
       tags:
         - nodejs
-    - role: kitty
-      tags:
-        - kitty
     - role: fonts
       tags:
         - fonts
