@@ -22,6 +22,9 @@
     - role: kitty
       tags:
         - kitty
+    - role: fonts
+      tags:
+        - fonts
     - role: docker
       tags:
         - docker
