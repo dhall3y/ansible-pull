@@ -1,7 +1,5 @@
 ---
-- name: copy nvim config directory if different
-  ansible.builtin.copy:
-    src: nvim/
-    dest: ~/.config/nvim/
-    backup: yes
-
+- include_tasks: ../../dotfiles/tasks/main.yml
+  vars:
+    stow_package: nvim
+  tags: [dotfiles]
