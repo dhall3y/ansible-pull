@@ -15,7 +15,8 @@
     dest: ~/Developer/dotfiles
     version: stow
 
-- name: stow config
-  ansible.builtin.shell: stow *
+- name: stow {{ stow_package }} config
+  command: stow {{ stow_package }}
   args:
     chdir: ~/Developer/dotfiles/stow/
+  when: not ansible_check_mode

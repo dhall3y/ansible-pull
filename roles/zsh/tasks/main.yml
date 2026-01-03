@@ -1,13 +1,6 @@
 ---
-- name: install zsh
-  ansible.builtin.apt:
-    name: zsh
-  become: true
+- include_tasks: install.yml
+  tags: [zsh]
 
-- name: set default shell to zsh
-  user:
-    name: "{{ ansible_user_id }}"
-    shell: "/usr/bin/zsh"
-  become: true
-
-- import_tasks: config.yml
+- include_tasks: config.yml
+  tags: [zsh, zsh_dotfiles, dotfiles]
