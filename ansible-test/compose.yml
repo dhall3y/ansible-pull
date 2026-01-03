@@ -3,5 +3,6 @@ services:
     container_name: ansible-test
     build: .
     volumes:
+      - ../:/root/ansible/
       - ./vault.pass:/root/vault.pass
     stdin_open: true
