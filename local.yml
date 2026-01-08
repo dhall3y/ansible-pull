@@ -25,6 +25,9 @@
     - role: docker
       tags:
         - docker
+    - role: git
+      tags:
+        - git
     - role: zathura
       tags:
         - zathura

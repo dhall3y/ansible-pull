@@ -1,0 +1,4 @@
+- include_tasks: ../../dotfiles/tasks/main.yml
+  vars:
+    stow_package: git
+  tags: [dotfiles]
