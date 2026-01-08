@@ -28,6 +28,9 @@
     - role: git
       tags:
         - git
+    - role: tmux
+      tags:
+        - tmux
     - role: zathura
       tags:
         - zathura

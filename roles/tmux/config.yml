@@ -1,0 +1,10 @@
+---
+- include_tasks: ../../dotfiles/tasks/main.yml
+  vars:
+    stow_package: tmux
+  tags: [dotfiles]
+
+- include_tasks: ../../dotfiles/tasks/main.yml
+  vars:
+    stow_package: tmux-sessionizer
+  tags: [dotfiles]

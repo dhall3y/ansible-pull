@@ -1,0 +1,6 @@
+---
+- include_tasks: install.yml
+  tags: [tmux]
+
+- include_tasks: config.yml
+  tags: [tmux, tmux_dotfiles, dotfiles]
